@@ -81,7 +81,7 @@ function App() {
               <p>Tarefas criadas</p>  <span>{tasks.length}</span>
             </div>
             <div className={style.taskCompleted}>
-              <p>Conluídas</p>  <span>{taskscompleted} de {tasks.length}</span>
+              <p>Concluídas</p>  <span>{taskscompleted} de {tasks.length}</span>
             </div>
           </header>
           <div className={style.line} />

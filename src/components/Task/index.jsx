@@ -6,7 +6,6 @@ import style from './style.module.scss';
 export default function Task({ data,handleCompleted,handleRemove}) {
 
   
-
     return (
         <div className={style.container}>
             <div>
