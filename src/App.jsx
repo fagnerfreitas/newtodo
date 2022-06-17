@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import style from './app.module.scss';
 
@@ -19,20 +20,24 @@ function App() {
 
   const handlerAddTask = () => {
 
-    setTask([...tasks, {
-      text: inputValue,
-      completed: false
-    }])
 
-    setInputValue('');
-
+    if (inputValue != '') {
+      setTask([...tasks, {
+        id:uuidv4(),
+        text: inputValue,
+        completed: false
+      }])
+  
+      setInputValue('');
+    }
   }
 
   const handleCompleted = (param) => {
 
     let aux = tasks.map((task, key) => {
-      if (task.text == param) {
+      if (task.id == param) {
         return {
+          id:task.id,
           text: task.text,
           completed: !task.completed
         };
@@ -48,22 +53,22 @@ function App() {
   const handleRemove = (param) => {
 
     const aux = tasks.filter((task) => {
-      return task.text !== param
+      return task.id !== param
     })
 
     setTask(aux);
   }
 
-  useEffect(()=>{
+  useEffect(() => {
 
     const aux = tasks.filter((task) => {
       return task.completed === true
     })
 
- 
+
     setTaskscompleted(aux.length);
 
-  },[tasks])
+  }, [tasks])
 
   return (
     <div className={style.container}>
@@ -73,7 +78,9 @@ function App() {
       </header>
       <div className={style.body}>
         <div className={style.containerForm}>
-          <input onChange={(e) => handleInput(e.target.value)} value={inputValue} placeholder="Adicione uma nova tarefa" /> <button onClick={handlerAddTask}>Criar + </button>
+          <input onChange={(e) => handleInput(e.target.value)} value={inputValue} placeholder="Adicione uma nova tarefa" /> <button onClick={handlerAddTask}><strong>Criar</strong> <span className="material-symbols-outlined">
+            add_circle
+        </span></button>
         </div>
         <div className={style.containerList}>
           <header>
@@ -98,7 +105,7 @@ function App() {
               : <>
 
                 {tasks.map((task, key) => (
-                  <Task key={key} data={task} handleCompleted={() => handleCompleted(task.text)} handleRemove={() => handleRemove(task.text)} />
+                  <Task key={task.id} data={task} handleCompleted={() => handleCompleted(task.id)} handleRemove={() => handleRemove(task.id)} />
                 ))}
 
               </>

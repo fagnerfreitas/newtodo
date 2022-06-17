@@ -51,6 +51,9 @@ input::-webkit-input-placeholder {
         }
 
         button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 3rem;
             margin-top: -1.5rem;
             min-width: 80px;
@@ -60,6 +63,13 @@ input::-webkit-input-placeholder {
             background-color: var(--blue);
             color: var(--white);
             cursor: pointer;
+
+            strong{
+                margin-right: 5px;
+            }
+            span{
+                font-size: 16px;
+            }
         }
     }
 }
